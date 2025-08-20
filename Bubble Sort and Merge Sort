@@ -1,0 +1,49 @@
+# Bubble sort : Repeatedly swaps adjacent elements if in wrong order.
+# Time Complexity: O(n²)
+# Space Complexity: O(1)
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+# Merge sort : Divides array into halves, sorts them, then merges.
+# Time Complexity: O(n log n)
+# Space Complexity: O(n)
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr)//2
+    left = merge_sort(arr[:mid])  # Recursively sort left half
+    right = merge_sort(arr[mid:]) # Recursively sort right half
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])   # add all remaining element
+    result.extend(right[j:])  # add all remaining element
+    return result
+
+mj = [23, 5, 42, 12, 8, 19, 3]
+target = 8
+
+
+# Bubble Sort
+bubble_array = mj.copy()
+bubble_sort(bubble_array)
+print(f"\nBubble Sort Result: {bubble_array}")
+
+# Merge Sort
+merge_array = merge_sort(mj.copy())
+print(f"Merge Sort Result: {merge_array}")
+
